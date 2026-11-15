@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8f0b22">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CODE CASH">
+  <meta name="description" content="CODE CASH EXPRESS Payment System">
+
+  <title>CODE CASH EXPRESS</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #f4f5f7;
+      font-family: Arial, sans-serif;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    #app-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <main id="app">
+    <iframe
+      id="app-frame"
+      title="CODE CASH EXPRESS Application"
+      src="https://script.google.com/macros/s/AKfycbzlGLxUwWR9RIHdW-IJKfxzjnkyVr2Be5OcQWinAnwWt44zapeuuWRIg3mkOMTyB3RE/exec"
+      allow="clipboard-read; clipboard-write"
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .catch(error => console.error('Service Worker:', error));
+      });
+    }
+  </script>
+</body>
+</html>
