@@ -1,0 +1,15 @@
+
+{
+  "id": "./",
+  "name": "CODE CASH EXPRESS",
+  "short_name": "CODE CASH",
+  "description": "CODE CASH EXPRESS Payment System",
+  "lang": "km",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4f5f7",
+  "theme_color": "#8f0b22",
+  "categories": ["finance", "business"]
+}
