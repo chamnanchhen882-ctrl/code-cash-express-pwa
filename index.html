@@ -1,66 +1,78 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="km">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#8f0b22">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="CODE CASH">
   <meta name="description" content="CODE CASH EXPRESS Payment System">
-
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>CODE CASH EXPRESS</title>
   <link rel="manifest" href="./manifest.webmanifest">
-
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
     html, body {
       width: 100%;
       height: 100%;
+      min-width: 0;
+      min-height: 100%;
       margin: 0;
+      padding: 0;
       overflow: hidden;
-      background: #f4f5f7;
-      font-family: Arial, sans-serif;
+      background: #fff;
     }
-
-    #app {
+    body {
+      position: fixed;
+      inset: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       height: 100dvh;
-      overflow: hidden;
+      overscroll-behavior: none;
+    }
+    #app-frame {
+      display: block;
+      width: 100%;
+      width: 100vw;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
       background: #fff;
     }
-
-    #app-frame {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-      background: #fff;
+    @supports (height: 100dvh) {
+      body { height: 100dvh; }
+      #app-frame { height: 100dvh; }
     }
   </style>
 </head>
-
 <body>
-  <main id="app">
-    <iframe
-      id="app-frame"
-      title="CODE CASH EXPRESS Application"
-      src="https://script.google.com/macros/s/AKfycbzlGLxUwWR9RIHdW-IJKfxzjnkyVr2Be5OcQWinAnwWt44zapeuuWRIg3mkOMTyB3RE/exec"
-      allow="clipboard-read; clipboard-write"
-      referrerpolicy="strict-origin-when-cross-origin">
-    </iframe>
-  </main>
+  <iframe
+    id="app-frame"
+    title="CODE CASH EXPRESS"
+    src="https://script.google.com/macros/s/AKfycbzlGLxUwWR9RIHdW-IJKfxzjnkyVr2Be5OcQWinAnwWt44zapeuuWRIg3mkOMTyB3RE/exec"
+    allow="clipboard-read; clipboard-write; camera; geolocation"
+    allowfullscreen
+    loading="eager"
+    referrerpolicy="strict-origin-when-cross-origin">
+  </iframe>
 
   <script>
+    // Refresh the GitHub Pages shell when a new service worker is available.
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .catch(error => console.error('Service Worker:', error));
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' })
+          .then(function (registration) {
+            registration.update().catch(function () {});
+          })
+          .catch(function (error) {
+            console.warn('Service worker registration failed:', error);
+          });
       });
     }
   </script>
